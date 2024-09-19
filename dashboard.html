@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
+
+</head>
+<body class="bg-gray-100 ">
+
+  <!-- Dashboard Container -->
+  <div class="flex h-full">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-blue-800 text-white flex flex-col ">
+        <div class="p-6 text-center text-2xl font-bold">
+          Lawyer Dashboard
+        </div>
+    
+        <!-- Sidebar Navigation -->
+        <nav class="mt-10">
+    
+          <!-- Dashboard Link -->
+          <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700">
+            Dashboard
+          </a>
+    
+          <!-- Cases Dropdown -->
+          <div x-data="{ open: false }" class="relative">
+            <a href="#" @click.prevent="open = !open" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 flex justify-between items-center">
+              Cases
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+    
+            <div x-show="open" class="ml-6 mt-2 space-y-2">
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">All Cases</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Add Case</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Pending Cases</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Completed Cases</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Important Cases</a>
+            </div>
+          </div>
+    
+          <!-- Clients Dropdown -->
+          <div x-data="{ open: false }" class="relative mt-4">
+            <a href="#" @click.prevent="open = !open" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 flex justify-between items-center">
+              Clients
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+    
+            <div x-show="open" class="ml-6 mt-2 space-y-2">
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">All Clients</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Add Client</a>
+            </div>
+          </div>
+    
+          <!-- Documents Dropdown -->
+          <div x-data="{ open: false }" class="relative mt-4">
+            <a href="#" @click.prevent="open = !open" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 flex justify-between items-center">
+              Documents
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+    
+            <div x-show="open" class="ml-6 mt-2 space-y-2">
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">All Documents</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Upload Document</a>
+            </div>
+          </div>
+    
+          <!-- Billing Dropdown -->
+          <div x-data="{ open: false }" class="relative mt-4">
+            <a href="#" @click.prevent="open = !open" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 flex justify-between items-center">
+              Billing
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+    
+            <div x-show="open" class="ml-6 mt-2 space-y-2">
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">All Invoices</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Add Invoice</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Pending Payments</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Completed Payments</a>
+            </div>
+          </div>
+    
+          <!-- Calendar Link (No Dropdown) -->
+          <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 mt-4">Calendar</a>
+    
+          <!-- Settings Dropdown -->
+          <div x-data="{ open: false }" class="relative mt-4">
+            <a href="#" @click.prevent="open = !open" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 flex justify-between items-center">
+              Settings
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+    
+            <div x-show="open" class="ml-6 mt-2 space-y-2">
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Profile Settings</a>
+              <a href="#" class="block py-1 px-4 rounded transition duration-200 hover:bg-blue-700">Password Settings</a>
+            </div>
+          </div>
+        </nav>
+      </aside>
+    
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col">
+      <!-- Top Header -->
+      <header class="bg-white shadow p-4 flex justify-between items-center">
+        <h2 class="text-xl font-semibold">Dashboard</h2>
+        <div class="flex items-center space-x-4">
+          <input type="text" placeholder="Search..." class="p-2 border rounded-lg">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Profile</button>
+          <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Logout</button>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <main class="flex-1 p-6 bg-gray-100">
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Stat Card 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold text-gray-700">Total Cases</h3>
+            <p class="mt-2 text-3xl font-bold text-blue-600">45</p>
+          </div>
+
+          <!-- Stat Card 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold text-gray-700">Pending Cases</h3>
+            <p class="mt-2 text-3xl font-bold text-yellow-600">12</p>
+          </div>
+
+          <!-- Stat Card 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold text-gray-700">Completed Cases</h3>
+            <p class="mt-2 text-3xl font-bold text-green-600">33</p>
+          </div>
+        </div>
+
+        <!-- Additional Section for Graphs, Recent Activities, etc. -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold text-gray-700">Recent Activities</h3>
+            <ul class="mt-4 space-y-2">
+              <li class="text-gray-600">Case #1234 updated by Lawyer A</li>
+              <li class="text-gray-600">New document uploaded for Client B</li>
+              <li class="text-gray-600">Invoice #4567 generated</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold text-gray-700">Upcoming Deadlines</h3>
+            <ul class="mt-4 space-y-2">
+              <li class="text-gray-600">Case #7890 - Court Date: 12th Oct</li>
+              <li class="text-gray-600">Client C - Meeting: 14th Oct</li>
+              <li class="text-gray-600">Invoice #1111 - Payment Due: 20th Oct</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Graph Section -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Case Progression Graph -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold text-gray-700">Case Progression Over Time</h3>
+            <canvas id="caseProgressionChart"></canvas>
+          </div>
+
+          <!-- Income and Expense Graph -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold text-gray-700">Income vs Expense</h3>
+            <canvas id="incomeExpenseChart"></canvas>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- JavaScript for Chart.js -->
+  <script>
+    // Case Progression Chart
+    const caseCtx = document.getElementById('caseProgressionChart').getContext('2d');
+    const caseProgressionChart = new Chart(caseCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        datasets: [{
+          label: 'Active Cases',
+          data: [5, 12, 10, 18, 7, 15, 10],
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2,
+          fill: true,
+        }, {
+          label: 'Completed Cases',
+          data: [2, 5, 8, 12, 15, 20, 30],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 2,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+          }
+        }
+      }
+    });
+
+    // Income vs Expense Chart
+    const incomeExpenseCtx = document.getElementById('incomeExpenseChart').getContext('2d');
+    const incomeExpenseChart = new Chart(incomeExpenseCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        datasets: [{
+          label: 'Income',
+          data: [5000, 7000, 8000, 12000, 9000, 15000, 20000],
+          backgroundColor: 'rgba(75, 192, 192, 0.8)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+        }, {
+          label: 'Expense',
+          data: [2000, 3000, 4000, 6000, 5000, 8000, 10000],
+          backgroundColor: 'rgba(255, 99, 132, 0.8)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+          }
+        }
+      }
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

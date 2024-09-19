@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<!-- Main Section -->
+<section class="relative flex flex-wrap lg:h-screen lg:items-center">
+
+    <!-- Left Side: Login Form -->
+    <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24 bg-white">
+        <div class="mx-auto max-w-lg text-center">
+            <h1 class="text-3xl font-bold sm:text-4xl">Welcome Back!</h1>
+            <p class="mt-4 text-gray-500">
+                Please log in to access your account and manage your cases.
+            </p>
+        </div>
+
+        <form action="#" class="mx-auto mt-8 max-w-md space-y-6">
+            <!-- Email Field -->
+            <div>
+                <label for="email" class="block text-left text-gray-700">Email</label>
+                <div class="relative mt-1">
+                    <input
+                      type="email"
+                      id="email"
+                      class="w-full rounded-lg border-gray-300 ring-2 p-4 pr-12 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Enter your email"
+                      required
+                    />
+                    <span class="absolute inset-y-0 right-4 flex items-center text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password Field with Toggle -->
+            <div>
+                <label for="password" class="block text-left text-gray-700">Password</label>
+                <div class="relative mt-1">
+                    <input
+                      type="password"
+                      id="password"
+                      class="w-full rounded-lg border-gray-300 ring-2 p-4 pr-12 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Enter your password"
+                      required
+                    />
+                    <!-- Toggle Button -->
+                    <button
+                      type="button"
+                      id="togglePassword"
+                      class="absolute inset-y-0 right-4 flex items-center text-gray-400 focus:outline-none"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sign In Button -->
+            <div class="flex justify-between items-center mt-4">
+                <p class="text-sm text-gray-500">
+                    No account?
+                    <a href="#" class="text-blue-500 hover:underline">Sign up</a>
+                </p>
+                <button
+                  type="submit"
+                  class="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Sign in
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Right Side: Image Section -->
+    <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
+        <img
+          src="https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+          alt="Background Image"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+    </div>
+</section>
+
+<!-- Firebase JS SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js"></script>
+
+<!-- Toggle Password Visibility Script -->
+<script>
+  const passwordInput = document.getElementById('password');
+  const togglePassword = document.getElementById('togglePassword');
+
+  togglePassword.addEventListener('click', function () {
+    // Toggle the type attribute
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    // Toggle the icon
+    this.querySelector('svg').classList.toggle('text-gray-400');
+    this.querySelector('svg').classList.toggle('text-blue-500');
+  });
+</script>
+
+</body>
+</html>
